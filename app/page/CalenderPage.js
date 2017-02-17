@@ -3,12 +3,14 @@ import React, {Component} from 'react'
 import {
     StyleSheet,
     View,
+    Image,
 } from 'react-native'
 
 class CalenderPage extends Component {
     render () {
         return (
             <View style={styles.content}>
+                <Image source={require("../res/bg~iphone@2x.png")} style={styles.background} />
             </View>
         )
     }

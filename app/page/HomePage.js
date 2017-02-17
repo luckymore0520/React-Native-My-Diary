@@ -24,24 +24,24 @@ export default class HomePage extends Component {
         });
     }
     
-    _renderContent(){
-        switch (this.state.selectedIndex) {
-            case 0: return <DiaryPage />
-            case 1: return <CalenderPage />
-            case 2: return <MomentPage />
-        }
-    }
 
     render () {
+        let selectedIndex = this.state.selectedIndex;
         return (
             <View style={styles.container}>
                 <View style={styles.navigator}>
                     <SegmentedControlIOS style={styles.segmentControl} selectedIndex={this.state.selectedIndex} tintColor="#4DA8E6" onChange={this._onChange} values={['Diary','Calender','Moment']} />
                 </View>
-                <View style={styles.content}>
-                     {this._renderContent()}
+                <View style={selectedIndex === 0 ? styles.contentViewToShow : styles.contentView}>
+                    <DiaryPage />
                 </View>
-                 <View style={styles.footer}>
+                <View style={selectedIndex === 1 ? styles.contentViewToShow : styles.contentView}>
+                    <CalenderPage/>
+                </View>
+                <View style={selectedIndex === 2 ? styles.contentViewToShow : styles.contentView}>
+                    <MomentPage />
+                </View>
+                <View style={styles.footer}>
                 </View>
             </View>
         )
@@ -58,18 +58,33 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         alignItems: 'center',
     },
-
     segmentControl: {
         marginTop:28,
         width: 270,
     },
-    content:{
-        flex:1
-        
+    contentView: {
+        position:'absolute',
+        top:60,
+        bottom:50,
+        left:0,
+        bottom:0,
+    },
+    contentViewToShow: {
+        position:'absolute',
+        top:60,
+        bottom:50,
+        left:0,
+        bottom:0,
+        zIndex:999,
     },
     footer:{
+        position:'absolute',
+        bottom:0,
+        left:0,
+        right:0,
         height:50,
-        backgroundColor:'#4DA8E6'
+        backgroundColor:'#4DA8E6',
+        zIndex:1000,
     }
 
     
